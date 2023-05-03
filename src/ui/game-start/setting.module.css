@@ -19,7 +19,7 @@
   flex-grow: 1;
 }
 
-.optiongroup > label {
+.optiongroup > input + label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,12 +38,13 @@
   background-color: hsla(205, 30%, 27%, 1);
 }
 
-.optiongroup > label:hover,
-.optiongroup > input:checked + label:hover {
-  background-color: hsla(205, 37%, 55%, 1);
-}
-
 .optiongroup > input:focus-visible + label {
   outline-style: auto;
   outline-color: -webkit-focus-ring-color;
+}
+
+@media (pointer: fine) {
+  .optiongroup > input + label:hover {
+    background-color: hsla(205, 37%, 55%, 1);
+  }
 }

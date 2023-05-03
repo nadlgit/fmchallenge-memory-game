@@ -1,0 +1,18 @@
+.container {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: clamp(2.75rem, calc(8.651vmin + 0.722rem), 4.875rem);
+  min-height: 100%;
+  padding-block: 0.75rem;
+  background-color: hsla(206, 45%, 15%, 1);
+}
+
+.main {
+  display: grid;
+  gap: clamp(1.5rem, calc(2.036vw + 1.023rem), 2rem);
+  width: min(calc(100% - 2 * 1.5rem), 40.875rem);
+  padding: clamp(1.5rem, calc(8.14vw - 0.41rem), 3.5rem);
+  border-radius: clamp(0.625rem, calc(2.545vw + 0.028rem), 1.25rem);
+  background-color: hsla(0, 0%, 99%, 1);
+}
