@@ -1,0 +1,9 @@
+.backdrop {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  height: 100%;
+  background-color: hsla(0, 0%, 0%, 1);
+  opacity: 0.5;
+}

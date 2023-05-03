@@ -28,6 +28,9 @@ body,
 body {
   font-family: 'Atkinson Hyperlegible', sans-serif;
 }
+body.noscroll {
+  overflow: hidden;
+}
 
 button:not(:disabled),
 input:not(:disabled) {
