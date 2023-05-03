@@ -1,7 +1,7 @@
 import styles from './button.module.css';
 
 type ButtonProps = {
-  variant: 'big' | 'primary' | 'secondary';
+  variant: 'big' | 'primary' | 'secondary' | 'small';
   label: string;
   onClick: () => void;
 };

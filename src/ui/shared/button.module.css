@@ -22,6 +22,12 @@
   background-color: hsla(203, 25%, 90%, 1);
 }
 
+.button.small {
+  min-height: clamp(2.5rem, calc(2vw + 2rem), 3rem);
+  font-size: clamp(1rem, calc(0.51vw + 0.88rem), 1.125rem);
+  line-height: clamp(1.125rem, calc(1.1vw + 0.867rem), 1.395rem);
+}
+
 @media (pointer: fine) {
   .button:hover {
     background-color: hsla(37, 100%, 65%, 1);
