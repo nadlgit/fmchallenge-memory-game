@@ -1,0 +1,42 @@
+.button {
+  min-width: 8rem;
+  min-height: clamp(3rem, calc(1.018vw + 2.76rem), 3.25rem);
+  padding-inline: 1.5rem;
+  border: none;
+  border-radius: 1.625rem;
+  font-weight: 700;
+  font-size: clamp(1.125rem, calc(0.509vw + 1.006rem), 1.25rem);
+  line-height: clamp(1.395rem, calc(0.63vw + 1.247rem), 1.55rem);
+  color: hsla(0, 0%, 99%, 1);
+}
+
+.button.fullwidth {
+  width: 100%;
+}
+
+.button.big {
+  min-height: clamp(3rem, calc(5.598vw + 1.688rem), 4.375rem);
+  border-radius: clamp(1.625rem, calc(2.29vw + 1.088rem), 2.1875rem);
+  font-size: clamp(1.125rem, calc(3.56vw + 0.29rem), 2rem);
+  line-height: clamp(1.395rem, calc(4.416vw + 0.36rem), 2.48rem);
+  background-color: hsla(37, 98%, 54%, 1);
+}
+.button.big:hover {
+  background-color: hsla(37, 100%, 65%, 1);
+}
+
+.button.primary {
+  background-color: hsla(37, 98%, 54%, 1);
+}
+.button.primary:hover {
+  background-color: hsla(37, 100%, 65%, 1);
+}
+
+.button.secondary {
+  color: hsla(205, 30%, 27%, 1);
+  background-color: hsla(203, 25%, 90%, 1);
+}
+.button.secondary:hover {
+  color: hsla(0, 0%, 99%, 1);
+  background-color: hsla(205, 37%, 55%, 1);
+}
