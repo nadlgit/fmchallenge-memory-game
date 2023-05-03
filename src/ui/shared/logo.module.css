@@ -1,0 +1,11 @@
+.home {
+  font-size: clamp(2rem, calc(2.04vw + 1.52rem), 2.5rem);
+  line-height: clamp(2.48rem, calc(2.52vw + 1.89rem), 3.1rem);
+  color: hsla(0, 0%, 99%, 1);
+}
+
+.header {
+  font-size: clamp(1.5rem, calc(4.07vw + 0.54rem), 2.5rem);
+  line-height: clamp(1.86rem, calc(5.05vw + 0.67rem), 3.1rem);
+  color: hsla(206, 45%, 15%, 1);
+}
