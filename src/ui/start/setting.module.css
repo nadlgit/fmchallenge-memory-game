@@ -1,0 +1,49 @@
+.title {
+  margin-bottom: clamp(0.625rem, calc(1.527vw + 0.267rem), 1rem);
+  color: hsla(203, 22%, 55%, 1);
+  font-size: clamp(1rem, calc(1.018vw + 0.761rem), 1.25rem);
+  line-height: clamp(1.25rem, calc(1.527vw + 0.892rem), 1.625rem);
+}
+
+.optiongroup {
+  display: flex;
+}
+.optiongroup.spread {
+  gap: clamp(0.625rem, calc(5.09vw - 0.568rem), 1.875rem);
+}
+.optiongroup.compact {
+  gap: clamp(0.625rem, calc(2.545vw + 0.028rem), 1.25rem);
+}
+.optiongroup > * {
+  flex-basis: 1%;
+  flex-grow: 1;
+}
+
+.optiongroup > label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: clamp(2.5rem, calc(3.05vw + 1.784rem), 3.25rem);
+  padding-inline: 1.5rem;
+  border: none;
+  border-radius: 1.625rem;
+  font-size: clamp(1rem, calc(2.545vw + 0.404rem), 1.625rem);
+  line-height: clamp(1.25rem, calc(3.05vw + 0.53rem), 2rem);
+  color: hsla(0, 0%, 99%, 1);
+  background-color: hsla(203, 28%, 79%, 1);
+  cursor: pointer;
+}
+
+.optiongroup > input:checked + label {
+  background-color: hsla(205, 30%, 27%, 1);
+}
+
+.optiongroup > label:hover,
+.optiongroup > input:checked + label:hover {
+  background-color: hsla(205, 37%, 55%, 1);
+}
+
+.optiongroup > input:focus-visible + label {
+  outline-style: auto;
+  outline-color: -webkit-focus-ring-color;
+}
