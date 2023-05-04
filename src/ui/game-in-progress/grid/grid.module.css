@@ -1,0 +1,55 @@
+.grid,
+.row {
+  display: flex;
+  gap: var(--grid-gap);
+  width: fit-content;
+}
+.grid {
+  flex-direction: column;
+}
+.grid[data-tilesize='small'] {
+  --grid-gap: clamp(0.57rem, calc(1.75vw + 0.16rem), 1rem);
+}
+.grid[data-tilesize='large'] {
+  --grid-gap: clamp(0.75rem, calc(2.036vw + 0.273rem), 1.25rem);
+}
+
+.tile {
+  display: grid;
+  place-content: center;
+  aspect-ratio: 1/1;
+  border-radius: 1000vmax;
+}
+.grid[data-tilesize='small'] .tile {
+  width: clamp(2.93rem, calc(8.936vw + 0.836rem), 5.125rem);
+  font-size: clamp(1.5rem, calc(5.089vw + 0.307rem), 2.75rem);
+}
+.grid[data-tilesize='large'] .tile {
+  width: clamp(3.75rem, calc(14.76vw + 0.29rem), 7.375rem);
+  font-size: clamp(2.5rem, calc(4.07vw + 1.54rem), 3.5rem);
+}
+
+.tilevisible {
+  background-color: hsla(203, 28%, 79%, 1);
+  color: hsla(0, 0%, 99%, 1);
+}
+.tilevisible.tilehighlighted {
+  background-color: hsla(37, 98%, 53%, 1);
+  color: hsla(0, 0%, 99%, 1);
+}
+
+.tilehidden > button {
+  aspect-ratio: inherit;
+  width: inherit;
+  border: none;
+  border-radius: inherit;
+  background-color: hsla(204, 30%, 27%, 1);
+  color: hsla(204, 30%, 27%, 1);
+}
+
+@media (pointer: fine) {
+  .tilehidden > button:hover {
+    background-color: hsla(205, 37%, 55%, 1);
+    color: hsla(205, 37%, 55%, 1);
+  }
+}
