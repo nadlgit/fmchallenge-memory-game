@@ -1,6 +1,5 @@
-import { Button } from '@/ui/shared';
+import { Button, useMediaQuery } from '@/ui/shared';
 import { MobileMenu } from './mobile-menu';
-import { useMediaQuery } from './use-media-query';
 import styles from './menu.module.css';
 
 type MenuProps = {
