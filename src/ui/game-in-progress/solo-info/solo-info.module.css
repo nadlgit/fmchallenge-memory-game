@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  justify-content: center;
   gap: clamp(1.5rem, calc(1.527vw + 1.142rem), 1.875rem);
   width: min(calc(100% - 2 * 1.5rem), 33.75rem);
   min-height: 4.375rem;
@@ -14,6 +15,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 16rem;
   background-color: hsla(203, 25%, 90%, 1);
   border-radius: clamp(0.3125rem, calc(1.272vw + 0.014rem), 0.625rem);
 }

@@ -1,0 +1,30 @@
+.container {
+  --screen-inner-margin-inline: clamp(1.5rem, calc(4.07vw + 0.55rem), 2.5rem);
+  --screen-width: min(69.375rem, 100%);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100%;
+  padding-inline: var(--screen-inner-margin-inline);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-inline: auto;
+  padding-top: var(--screen-inner-margin-inline);
+  width: var(--screen-width);
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  padding-bottom: var(--screen-inner-margin-inline);
+}
+.main > :first-child {
+  padding-block: var(--screen-inner-margin-inline);
+}
+.main > :last-child {
+  width: var(--screen-width);
+}

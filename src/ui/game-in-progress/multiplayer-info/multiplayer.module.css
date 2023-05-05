@@ -1,9 +1,7 @@
 .container {
-  --margin-inline: clamp(1.5rem, calc(4.07vw + 0.55rem), 2.5rem);
   display: flex;
   justify-content: center;
-  gap: var(--margin-inline);
-  margin-inline: var(--margin-inline);
+  gap: var(--screen-inner-margin-inline);
 }
 
 .info {
@@ -13,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   min-width: 3.5rem;
-  width: calc(0.25 * (100vw - 5 * var(--margin-inline)));
+  width: calc(0.25 * (100vw - 5 * var(--screen-inner-margin-inline)));
   margin-top: var(--arrow-height);
   padding: clamp(0.625rem, calc(1.527vw + 0.267rem), 1rem);
   background-color: hsla(203, 25%, 90%, 1);
