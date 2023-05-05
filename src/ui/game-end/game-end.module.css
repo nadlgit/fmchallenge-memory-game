@@ -1,0 +1,70 @@
+.container {
+  min-width: min(calc(100vw - 2 * 1.5rem), 40.875rem);
+  margin-inline: auto;
+  padding: clamp(1.5rem, calc(8.14vw - 0.41rem), 3.5rem);
+  border-radius: clamp(0.625rem, calc(2.544vw + 0.028rem), 1.25rem);
+  background-color: hsla(0, 0%, 99%, 1);
+}
+
+.heading {
+  margin-block: clamp(0.5rem, calc(2.04vw + 0.02rem), 1rem);
+  color: hsla(206, 45%, 15%, 1);
+  text-align: center;
+  font-size: clamp(1.5rem, calc(6.1vw + 0.07rem), 3rem);
+  line-height: clamp(1.875rem, calc(7.63vw + 0.086rem), 3.75rem);
+}
+
+.subheading {
+  margin-bottom: clamp(1.5rem, calc(4.07vw + 0.54rem), 2.5rem);
+  color: hsla(203, 22%, 55%, 1);
+  text-align: center;
+  font-size: clamp(0.875rem, calc(1.018vw + 0.636rem), 1.125rem);
+  line-height: clamp(1.0625rem, calc(1.272vw + 0.764rem), 1.375rem);
+}
+
+.detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: clamp(3rem, calc(6.1vw + 1.57rem), 4.5rem);
+  margin-block: clamp(0.5rem, calc(2.04vw + 0.02rem), 1rem);
+  padding-inline: clamp(1rem, calc(4.07vw + 0.04rem), 2rem);
+  background-color: hsla(203, 25%, 90%, 1);
+  border-radius: clamp(0.3125rem, calc(1.272vw + 0.014rem), 0.625rem);
+}
+.label {
+  color: hsla(203, 22%, 55%, 1);
+  font-size: clamp(0.9375rem, calc(0.763vw + 0.758rem), 1.125rem);
+  line-height: clamp(1.1875rem, calc(0.763vw + 1.008rem), 1.375rem);
+}
+.value {
+  color: hsla(206, 45%, 15%, 1);
+  font-size: clamp(1.5rem, calc(2.035vw + 1.023rem), 2rem);
+  line-height: clamp(1.875rem, calc(2.544vw + 1.278rem), 2.5rem);
+}
+
+.detail.highlighted {
+  background-color: hsla(206, 45%, 15%, 1);
+}
+.highlighted .label,
+.highlighted .value {
+  color: hsla(0, 0%, 99%, 1);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: clamp(1.5rem, calc(8.14vw - 0.41rem), 3.5rem);
+  margin-bottom: clamp(0, calc(3.56vw - 0.835rem), 0.875rem);
+}
+.buttons > * {
+  flex-basis: 1%;
+  flex-grow: 1;
+}
+
+@media screen and (min-width: 34rem) {
+  .buttons {
+    flex-direction: row;
+  }
+}
