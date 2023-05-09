@@ -1,4 +1,2 @@
-export * from './button';
-export * from './logo';
-export * from './modal';
+export * from './components';
 export * from './use-media-query';
