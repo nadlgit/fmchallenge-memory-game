@@ -3,7 +3,7 @@ import { type GameState } from './game-state';
 import { makeMove } from './make-move';
 
 describe('makeMove()', () => {
-  const initialState: GameState = {
+  const initialState: Omit<GameState, 'isEndGame'> = {
     grid: [
       [
         { value: '1', isTurnedOver: false },

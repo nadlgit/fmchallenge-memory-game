@@ -3,7 +3,7 @@ import { type GameState } from './game-state';
 import { restartGame } from './restart-game';
 
 describe('restartGame()', () => {
-  const initialState: GameState = {
+  const initialState: Omit<GameState, 'isEndGame'> = {
     grid: [
       [
         { value: '1', isTurnedOver: true },
