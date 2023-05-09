@@ -1,4 +1,4 @@
-import { game } from './game';
+import { game } from '@/core/entities';
 
 export const restartGame = () => {
   resetGrid();

@@ -1,5 +1,4 @@
-import { game } from './game';
-import { gridItemValues } from './game-state';
+import { game, gridItemValues } from '@/core/entities';
 
 export type GridSize = '4x4' | '6x6';
 type GameSettings = { gridSize: GridSize; nbPlayers: number };

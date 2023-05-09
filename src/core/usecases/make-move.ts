@@ -1,4 +1,4 @@
-import { game } from './game';
+import { game } from '@/core/entities';
 
 type Position = { r: number; c: number };
 

@@ -1,4 +1,4 @@
-import { game } from './game';
+import { game } from '@/core/entities';
 import { startNewGame, type GridSize } from './start-new-game';
 
 describe('startNewGame()', () => {

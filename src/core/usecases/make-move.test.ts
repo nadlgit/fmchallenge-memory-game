@@ -1,5 +1,4 @@
-import { game } from './game';
-import { type GameState } from './game-state';
+import { game, type GameState } from '@/core/entities';
 import { makeMove } from './make-move';
 
 describe('makeMove()', () => {
