@@ -1,5 +1,5 @@
 import { game } from './game';
-import { startNewGame, type GameSettings } from './start-new-game';
+import { startNewGame, type GridSize } from './start-new-game';
 
 describe('startNewGame()', () => {
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('startNewGame()', () => {
   it.each([
     { gridSize: '4x4', length: 4 },
     { gridSize: '6x6', length: 6 },
-  ] as { gridSize: GameSettings['gridSize']; length: number }[])(
+  ] as { gridSize: GridSize; length: number }[])(
     'set grid size given $gridSize size',
     ({ gridSize, length }) => {
       startNewGame({ gridSize, nbPlayers: 1 });

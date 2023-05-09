@@ -1,7 +1,8 @@
 import { game } from './game';
 import { gridItemValues } from './game-state';
 
-export type GameSettings = { gridSize: '4x4' | '6x6'; nbPlayers: number };
+export type GridSize = '4x4' | '6x6';
+type GameSettings = { gridSize: GridSize; nbPlayers: number };
 
 export const startNewGame = ({ gridSize, nbPlayers }: GameSettings) => {
   game.grid = createGrid(gridSize);
@@ -11,7 +12,7 @@ export const startNewGame = ({ gridSize, nbPlayers }: GameSettings) => {
   game.notifyUpdate();
 };
 
-const createGrid = (gridSize: GameSettings['gridSize']) => {
+const createGrid = (gridSize: GridSize) => {
   const sideLengthConfig = { '4x4': 4, '6x6': 6 };
   const sideLength = sideLengthConfig[gridSize];
   const distinctValues = gridItemValues.slice(0, (sideLength * sideLength) / 2);
