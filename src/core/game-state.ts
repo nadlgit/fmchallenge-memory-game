@@ -27,4 +27,5 @@ export type GameState = {
   playerPairs: number[];
   activePlayerIndex: number;
   moves: number;
+  isEndGame: boolean;
 };

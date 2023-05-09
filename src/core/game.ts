@@ -3,9 +3,10 @@ import { type GameState } from './game-state';
 const gameUpdateCallbacks: Record<number, (state: GameState) => void> = {};
 let nextCallbackId = 1;
 
-export const game: GameState & {
+export const game: Omit<GameState, 'isEndGame'> & {
   registerUpdateCallback: (callback: (state: GameState) => void) => () => void;
   notifyUpdate: () => void;
+  isEndGame: () => boolean;
 } = {
   grid: [],
   playerPairs: [],
@@ -29,7 +30,10 @@ export const game: GameState & {
         playerPairs: [...playerPairs],
         activePlayerIndex,
         moves,
+        isEndGame: game.isEndGame(),
       });
     }
   },
+
+  isEndGame: () => game.grid.every((row) => row.every(({ isTurnedOver }) => isTurnedOver)),
 };

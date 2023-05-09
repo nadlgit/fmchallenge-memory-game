@@ -13,6 +13,7 @@ describe('onStateUpdate()', () => {
       playerPairs: game.playerPairs,
       activePlayerIndex: game.activePlayerIndex,
       moves: game.moves,
+      isEndGame: game.isEndGame(),
     });
   });
 
@@ -36,6 +37,7 @@ describe('onStateUpdate()', () => {
       playerPairs: game.playerPairs,
       activePlayerIndex: game.activePlayerIndex,
       moves: game.moves,
+      isEndGame: game.isEndGame(),
     });
     expect(gameState.grid).not.toBe(game.grid);
     expect(gameState.playerPairs).not.toBe(game.playerPairs);
