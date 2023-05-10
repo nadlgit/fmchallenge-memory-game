@@ -2,6 +2,7 @@ import { createContext, type PropsWithChildren, useCallback, useEffect, useState
 import {
   type GameState,
   type GridSize,
+  makeMove,
   onStateUpdate,
   onTimerUpdate,
   restartGame as coreRestartGame,
@@ -9,18 +10,21 @@ import {
   startTimer,
   stopTimer,
 } from '@/core';
+import { formatTimeElapsed } from './format-time-elapsed';
 
 type GameContextValue = {
   isSettingsScreen: boolean;
   isIconTheme: boolean;
+  grid: GameState['grid'];
   playerPairs: GameState['playerPairs'];
   activePlayerIndex: GameState['activePlayerIndex'];
   moves: GameState['moves'];
-  secondsElapsed: number;
+  timeElapsed: string;
   isEndGame: GameState['isEndGame'];
   createGame: (iconTheme: boolean, nbPlayers: number, gridSize: GridSize) => void;
   restartGame: () => void;
   showSettingsScreen: () => void;
+  makeMove: typeof makeMove;
 };
 export const GameContext = createContext<GameContextValue | undefined>(undefined);
 
@@ -28,11 +32,14 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const [isSettingsScreen, setIsSettingsScreen] =
     useState<GameContextValue['isSettingsScreen']>(true);
   const [isIconTheme, setIsIconTheme] = useState<GameContextValue['isIconTheme']>(false);
+  const [grid, setGrid] = useState<GameContextValue['grid']>([]);
   const [playerPairs, setPlayerPairs] = useState<GameContextValue['playerPairs']>([]);
   const [activePlayerIndex, setActivePlayerIndex] =
     useState<GameContextValue['activePlayerIndex']>(0);
   const [moves, setMoves] = useState<GameContextValue['moves']>(0);
-  const [secondsElapsed, setSecondsElapsed] = useState<GameContextValue['secondsElapsed']>(0);
+  const [timeElapsed, setTimeElapsed] = useState<GameContextValue['timeElapsed']>(
+    formatTimeElapsed(0)
+  );
   const [isEndGame, setIsEndGame] = useState<GameContextValue['isEndGame']>(false);
 
   const createGame: GameContextValue['createGame'] = useCallback(
@@ -62,6 +69,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     const unregisterStateUpdate = onStateUpdate((state) => {
+      setGrid(state.grid);
       setPlayerPairs(state.playerPairs);
       setActivePlayerIndex(state.activePlayerIndex);
       setMoves(state.moves);
@@ -71,7 +79,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       }
     });
     const unregisterTimerUpdate = onTimerUpdate((secondsElapsed) => {
-      setSecondsElapsed(secondsElapsed);
+      setTimeElapsed(formatTimeElapsed(secondsElapsed));
     });
     return () => {
       stopTimer();
@@ -85,14 +93,16 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       value={{
         isSettingsScreen,
         isIconTheme,
+        grid,
         playerPairs,
         activePlayerIndex,
         moves,
-        secondsElapsed,
+        timeElapsed,
         isEndGame,
         createGame,
         restartGame,
         showSettingsScreen,
+        makeMove,
       }}
     >
       {children}

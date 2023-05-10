@@ -19,9 +19,10 @@ export const gridItemValues = [
   '18',
 ] as const;
 
+export type GridItemValue = (typeof gridItemValues)[number];
 export type GameState = {
   grid: {
-    value: (typeof gridItemValues)[number];
+    value: GridItemValue;
     isTurnedOver: boolean;
   }[][];
   playerPairs: number[];

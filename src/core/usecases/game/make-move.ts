@@ -7,6 +7,7 @@ export const makeMove = (position1: Position, position2: Position) => {
   const item2 = game.grid[position2.r][position2.c];
 
   if (item1.isTurnedOver || item2.isTurnedOver) {
+    game.notifyUpdate();
     return;
   }
 
@@ -17,6 +18,7 @@ export const makeMove = (position1: Position, position2: Position) => {
   }
   switchActivePlayer();
   game.moves++;
+  game.notifyUpdate();
 };
 
 const switchActivePlayer = () => {

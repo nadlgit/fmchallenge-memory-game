@@ -1,4 +1,4 @@
-import { game } from '@/core/entities';
+import { game, type GridItemValue } from '@/core/entities';
 import { startNewGame, type GridSize } from './start-new-game';
 
 describe('startNewGame()', () => {
@@ -33,7 +33,7 @@ describe('startNewGame()', () => {
         acc[value]++;
       });
       return acc;
-    }, {} as Record<(typeof game.grid)[number][number]['value'], number>);
+    }, {} as Record<GridItemValue, number>);
     expect(Object.values(gridValues)).toIncludeSameMembers(new Array(8).fill(2));
   });
 

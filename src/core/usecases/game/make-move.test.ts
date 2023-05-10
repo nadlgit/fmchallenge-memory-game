@@ -84,6 +84,13 @@ describe('makeMove()', () => {
     expect(game.moves).toBe(initialState.moves + 1);
   });
 
+  it('triggers game update callback', () => {
+    const callback = vi.fn();
+    game.registerUpdateCallback(callback);
+    makeMove(...noMatchMove);
+    expect(callback).toHaveBeenCalled();
+  });
+
   it('keeps grid given move with already turned over item', () => {
     makeMove(...invalidMove);
     expect(game.grid).toEqual(initialState.grid);
@@ -104,7 +111,14 @@ describe('makeMove()', () => {
     expect(game.moves).toBe(initialState.moves);
   });
 
-  it('keeps active player given last match', () => {
+  it('triggers game update callback given move with already turned over item', () => {
+    const callback = vi.fn();
+    game.registerUpdateCallback(callback);
+    makeMove(...invalidMove);
+    expect(callback).toHaveBeenCalled();
+  });
+
+  it('keeps active player given move is last match', () => {
     game.grid = [
       [
         { value: '1', isTurnedOver: false },
