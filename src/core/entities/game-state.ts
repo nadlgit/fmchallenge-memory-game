@@ -24,6 +24,7 @@ export type GameState = {
   grid: {
     value: GridItemValue;
     isTurnedOver: boolean;
+    justMatched: boolean;
   }[][];
   playerPairs: number[];
   activePlayerIndex: number;

@@ -5,28 +5,28 @@ describe('restartGame()', () => {
   const initialState: Omit<GameState, 'isEndGame'> = {
     grid: [
       [
-        { value: '1', isTurnedOver: true },
-        { value: '1', isTurnedOver: true },
-        { value: '2', isTurnedOver: true },
-        { value: '2', isTurnedOver: true },
+        { value: '1', isTurnedOver: true, justMatched: true },
+        { value: '1', isTurnedOver: true, justMatched: true },
+        { value: '2', isTurnedOver: true, justMatched: true },
+        { value: '2', isTurnedOver: true, justMatched: true },
       ],
       [
-        { value: '3', isTurnedOver: true },
-        { value: '3', isTurnedOver: true },
-        { value: '4', isTurnedOver: true },
-        { value: '4', isTurnedOver: true },
+        { value: '3', isTurnedOver: true, justMatched: true },
+        { value: '3', isTurnedOver: true, justMatched: true },
+        { value: '4', isTurnedOver: true, justMatched: true },
+        { value: '4', isTurnedOver: true, justMatched: true },
       ],
       [
-        { value: '5', isTurnedOver: true },
-        { value: '5', isTurnedOver: true },
-        { value: '6', isTurnedOver: true },
-        { value: '6', isTurnedOver: true },
+        { value: '5', isTurnedOver: true, justMatched: true },
+        { value: '5', isTurnedOver: true, justMatched: true },
+        { value: '6', isTurnedOver: true, justMatched: true },
+        { value: '6', isTurnedOver: true, justMatched: true },
       ],
       [
-        { value: '7', isTurnedOver: true },
-        { value: '7', isTurnedOver: true },
-        { value: '8', isTurnedOver: true },
-        { value: '8', isTurnedOver: true },
+        { value: '7', isTurnedOver: true, justMatched: true },
+        { value: '7', isTurnedOver: true, justMatched: true },
+        { value: '8', isTurnedOver: true, justMatched: true },
+        { value: '8', isTurnedOver: true, justMatched: true },
       ],
     ],
     playerPairs: [7, 1],
@@ -70,6 +70,15 @@ describe('restartGame()', () => {
     for (const row of game.grid) {
       for (const { isTurnedOver } of row) {
         expect(isTurnedOver).toBeFalse();
+      }
+    }
+  });
+
+  it('sets grid items as not just matched', () => {
+    restartGame();
+    for (const row of game.grid) {
+      for (const { justMatched } of row) {
+        expect(justMatched).toBeFalse();
       }
     }
   });

@@ -20,7 +20,7 @@ const createGrid = (gridSize: GridSize) => {
   for (let r = 0; r < sideLength; r++) {
     const row = [];
     for (let c = 0; c < sideLength; c++) {
-      row.push({ value: values[r * sideLength + c], isTurnedOver: false });
+      row.push({ value: values[r * sideLength + c], isTurnedOver: false, justMatched: false });
     }
     grid.push(row);
   }

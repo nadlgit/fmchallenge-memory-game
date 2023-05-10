@@ -46,6 +46,15 @@ describe('startNewGame()', () => {
     }
   });
 
+  it('sets grid items as not just matched', () => {
+    startNewGame({ gridSize: '4x4', nbPlayers: 1 });
+    for (const row of game.grid) {
+      for (const { justMatched } of row) {
+        expect(justMatched).toBeFalse();
+      }
+    }
+  });
+
   it.each([1, 2, 3, 4])('sets same number of player pairs given %s player(s)', (nbPlayers) => {
     startNewGame({ gridSize: '4x4', nbPlayers });
     expect(game.playerPairs).toHaveLength(nbPlayers);

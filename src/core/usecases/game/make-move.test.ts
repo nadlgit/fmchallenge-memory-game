@@ -5,16 +5,16 @@ describe('makeMove()', () => {
   const initialState: Omit<GameState, 'isEndGame'> = {
     grid: [
       [
-        { value: '1', isTurnedOver: false },
-        { value: '3', isTurnedOver: true },
-        { value: '2', isTurnedOver: true },
-        { value: '2', isTurnedOver: true },
+        { value: '1', isTurnedOver: false, justMatched: false },
+        { value: '3', isTurnedOver: true, justMatched: false },
+        { value: '2', isTurnedOver: true, justMatched: true },
+        { value: '2', isTurnedOver: true, justMatched: true },
       ],
       [
-        { value: '3', isTurnedOver: true },
-        { value: '1', isTurnedOver: false },
-        { value: '4', isTurnedOver: false },
-        { value: '4', isTurnedOver: false },
+        { value: '3', isTurnedOver: true, justMatched: false },
+        { value: '1', isTurnedOver: false, justMatched: false },
+        { value: '4', isTurnedOver: false, justMatched: false },
+        { value: '4', isTurnedOver: false, justMatched: false },
       ],
     ],
     playerPairs: [1, 1, 1, 1],
@@ -42,10 +42,37 @@ describe('makeMove()', () => {
   });
 
   it('sets move items turned over given match', () => {
-    makeMove(...matchMove);
-    const items = matchMove.map(({ r, c }) => game.grid[r][c]);
-    for (const { isTurnedOver } of items) {
+    const move = matchMove;
+    makeMove(...move);
+    for (const { isTurnedOver } of move.map(({ r, c }) => game.grid[r][c])) {
       expect(isTurnedOver).toBeTrue();
+    }
+  });
+
+  it('unsets previous just matched items', () => {
+    makeMove(...noMatchMove);
+    for (let r = 0; r < game.grid.length; r++) {
+      for (let c = 0; c < game.grid[r].length; c++) {
+        if (initialState.grid[r][c].justMatched) {
+          expect(game.grid[r][c].justMatched).toBeFalse();
+        }
+      }
+    }
+  });
+
+  it('keeps move items not just matched given no match', () => {
+    const move = noMatchMove;
+    makeMove(...noMatchMove);
+    for (const { justMatched } of move.map(({ r, c }) => game.grid[r][c])) {
+      expect(justMatched).toBeFalse();
+    }
+  });
+
+  it('sets move items just matched given match', () => {
+    const move = matchMove;
+    makeMove(...move);
+    for (const { justMatched } of move.map(({ r, c }) => game.grid[r][c])) {
+      expect(justMatched).toBeTrue();
     }
   });
 
@@ -121,16 +148,16 @@ describe('makeMove()', () => {
   it('keeps active player given move is last match', () => {
     game.grid = [
       [
-        { value: '1', isTurnedOver: false },
-        { value: '3', isTurnedOver: true },
-        { value: '2', isTurnedOver: true },
-        { value: '2', isTurnedOver: true },
+        { value: '1', isTurnedOver: false, justMatched: false },
+        { value: '3', isTurnedOver: true, justMatched: false },
+        { value: '2', isTurnedOver: true, justMatched: true },
+        { value: '2', isTurnedOver: true, justMatched: true },
       ],
       [
-        { value: '3', isTurnedOver: true },
-        { value: '1', isTurnedOver: false },
-        { value: '4', isTurnedOver: true },
-        { value: '4', isTurnedOver: true },
+        { value: '3', isTurnedOver: true, justMatched: false },
+        { value: '1', isTurnedOver: false, justMatched: false },
+        { value: '4', isTurnedOver: true, justMatched: false },
+        { value: '4', isTurnedOver: true, justMatched: false },
       ],
     ];
     makeMove({ r: 0, c: 0 }, { r: 1, c: 1 });

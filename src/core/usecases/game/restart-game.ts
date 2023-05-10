@@ -10,7 +10,7 @@ export const restartGame = () => {
 
 const resetGrid = () => {
   const items = game.grid
-    .flatMap((row) => row.map(({ value }) => ({ value, isTurnedOver: false })))
+    .flatMap((row) => row.map(({ value }) => ({ value, isTurnedOver: false, justMatched: false })))
     .sort(() => Math.random() - 0.5);
   for (let r = 0; r < game.grid.length; r++) {
     for (let c = 0; c < game.grid[0].length; c++) {
