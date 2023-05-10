@@ -19,30 +19,38 @@ export const GameInProgress = () => {
     makeMove,
   } = useGame();
 
-  //TODO: refactor
-  const [gridData, setGridData] = useState<GridProps['data']>(grid);
-  const [move, setMove] = useState<{ r: number; c: number }[]>([]);
+  const [data, setData] = useState<{
+    grid: GridProps['data'];
+    tilesClicked: { r: number; c: number }[];
+  }>({ grid, tilesClicked: [] });
+
   const handleTileClick = (r: number, c: number) => {
-    setMove((m) => [...m, { r, c }]);
-    setGridData((g) =>
-      g.map((row, rowIndex) =>
-        row.map((item, columnIndex) => ({
-          ...item,
-          isTurnedOver: r === rowIndex && c === columnIndex ? true : item.isTurnedOver,
-        }))
-      )
+    setData((prev) =>
+      prev.tilesClicked.length < 2
+        ? {
+            grid: prev.grid.map((row, rowIndex) =>
+              row.map((item, columnIndex) => ({
+                ...item,
+                isTurnedOver: (r === rowIndex && c === columnIndex) || item.isTurnedOver,
+              }))
+            ),
+            tilesClicked: [...prev.tilesClicked, { r, c }],
+          }
+        : prev
     );
   };
+
   useEffect(() => {
-    setGridData(grid);
-    setMove([]);
-  }, [grid]);
-  useEffect(() => {
-    if (move.length === 2) {
-      makeMove(move[0], move[1]);
+    if (data.tilesClicked.length === 2) {
+      setTimeout(() => {
+        makeMove(data.tilesClicked[0], data.tilesClicked[1]);
+      }, 200);
     }
-  }, [move, makeMove]);
-  //END TODO
+  }, [data.tilesClicked, makeMove]);
+
+  useEffect(() => {
+    setData({ grid, tilesClicked: [] });
+  }, [grid]);
 
   return (
     <div className={styles.container}>
@@ -51,7 +59,7 @@ export const GameInProgress = () => {
         <Menu restart={restartGame} newGame={showSettingsScreen} />
       </header>
       <main className={styles.main}>
-        <Grid data={gridData} withIcons={isIconTheme} onTileClick={handleTileClick} />
+        <Grid data={data.grid} withIcons={isIconTheme} onTileClick={handleTileClick} />
         {playerPairs.length > 1 ? (
           <MultiplayerInfo playerScores={playerPairs} playerIndex={activePlayerIndex} />
         ) : (
