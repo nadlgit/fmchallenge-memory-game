@@ -1,7 +1,9 @@
-import { Button, Modal } from '@/ui/shared';
+import { Button, Modal, useGame } from '@/ui/shared';
 import styles from './game-end.module.css';
 
 export const GameEnd = () => {
+  const { moves, timeElapsed, restartGame, showSettingsScreen } = useGame();
+
   const heading = "It's a tie!";
   const subheading = 'Game over! Here are the results...';
   return (
@@ -10,11 +12,11 @@ export const GameEnd = () => {
       <div className={styles.subheading}>{subheading}</div>
       <Detail label="Player 3 (Winner!)" value="6 Pairs" isHighlighted />
       <Detail label="Player 4" value="1 Pairs" />
-      <Detail label="Time Elapsed" value="1:53" />
-      <Detail label="Moves Taken" value="39 Moves" />
+      <Detail label="Time Elapsed" value={timeElapsed} />
+      <Detail label="Moves Taken" value={`${moves} Moves`} />
       <div className={styles.buttons}>
-        <Button label="Restart" variant="primary" onClick={() => null} />
-        <Button label="Setup New Game" variant="secondary" onClick={() => null} />
+        <Button label="Restart" variant="primary" onClick={restartGame} />
+        <Button label="Setup New Game" variant="secondary" onClick={showSettingsScreen} />
       </div>
     </Modal>
   );
