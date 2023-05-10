@@ -2,18 +2,40 @@ import { Button, Modal, useGame } from '@/ui/shared';
 import styles from './game-end.module.css';
 
 export const GameEnd = () => {
-  const { moves, timeElapsed, restartGame, showSettingsScreen } = useGame();
-
-  const heading = "It's a tie!";
-  const subheading = 'Game over! Here are the results...';
+  const { playerPairs, moves, timeElapsed, restartGame, showSettingsScreen } = useGame();
+  const isMultiplayer = playerPairs.length > 1;
+  const playerResults = playerPairs
+    .map((pairs, idx) => ({ name: `Player ${idx + 1}`, pairs }))
+    .sort((a, b) => b.pairs - a.pairs);
+  const maxPairs = playerPairs.reduce((acc, curr) => Math.max(acc, curr), 0);
+  const winners = playerResults.filter(({ pairs }) => pairs === maxPairs).map(({ name }) => name);
+  const multiplayerHeading = winners.length === 1 ? `${winners[0]} Wins!` : 'It’s a tie!';
+  const multiplayerSubheading = 'Game over! Here are the results…';
+  const soloHeading = 'You did it!';
+  const soloSubheading = 'Game over! Here’s how you got on…';
   return (
     <Modal className={styles.container}>
-      <div className={styles.heading}>{heading}</div>
-      <div className={styles.subheading}>{subheading}</div>
-      <Detail label="Player 3 (Winner!)" value="6 Pairs" isHighlighted />
-      <Detail label="Player 4" value="1 Pairs" />
-      <Detail label="Time Elapsed" value={timeElapsed} />
-      <Detail label="Moves Taken" value={`${moves} Moves`} />
+      <div className={styles.heading}>{isMultiplayer ? multiplayerHeading : soloHeading}</div>
+      <div className={styles.subheading}>
+        {isMultiplayer ? multiplayerSubheading : soloSubheading}
+      </div>
+      {isMultiplayer ? (
+        <>
+          {playerResults.map(({ name, pairs }) => (
+            <Detail
+              key={name}
+              label={name}
+              value={`${pairs} Pairs`}
+              isHighlighted={winners.includes(name)}
+            />
+          ))}
+        </>
+      ) : (
+        <>
+          <Detail label="Time Elapsed" value={timeElapsed} />
+          <Detail label="Moves Taken" value={`${moves} Moves`} />
+        </>
+      )}
       <div className={styles.buttons}>
         <Button label="Restart" variant="primary" onClick={restartGame} />
         <Button label="Setup New Game" variant="secondary" onClick={showSettingsScreen} />
