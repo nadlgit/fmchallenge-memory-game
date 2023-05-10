@@ -4,6 +4,16 @@
   padding: clamp(1.5rem, calc(8.14vw - 0.41rem), 3.5rem);
   border-radius: clamp(0.625rem, calc(2.544vw + 0.028rem), 1.25rem);
   background-color: hsla(0, 0%, 99%, 1);
+  animation: appear 0.5s;
+}
+
+@keyframes appear {
+  from {
+    transform: scale(50%);
+  }
+  to {
+    transform: scale(100%);
+  }
 }
 
 .heading {
