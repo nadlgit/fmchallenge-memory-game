@@ -1,7 +1,7 @@
+import { CallbackHandler } from './callback-handler';
 import { type GameState } from './game-state';
 
-const gameUpdateCallbacks: Record<number, (state: GameState) => void> = {};
-let nextCallbackId = 1;
+const callbackHandler = new CallbackHandler<GameState>();
 
 export const game: Omit<GameState, 'isEndGame'> & {
   registerUpdateCallback: (callback: (state: GameState) => void) => () => void;
@@ -13,26 +13,17 @@ export const game: Omit<GameState, 'isEndGame'> & {
   activePlayerIndex: 0,
   moves: 0,
 
-  registerUpdateCallback: (callback) => {
-    const callbackId = nextCallbackId;
-    gameUpdateCallbacks[callbackId] = callback;
-    nextCallbackId++;
-    return () => {
-      delete gameUpdateCallbacks[callbackId];
-    };
-  },
+  registerUpdateCallback: (callback) => callbackHandler.registerCallback(callback),
 
   notifyUpdate: () => {
     const { grid, playerPairs, activePlayerIndex, moves } = game;
-    for (const callback of Object.values(gameUpdateCallbacks)) {
-      callback({
-        grid: grid.map((row) => row.map((item) => ({ ...item }))),
-        playerPairs: [...playerPairs],
-        activePlayerIndex,
-        moves,
-        isEndGame: game.isEndGame(),
-      });
-    }
+    callbackHandler.notifyState({
+      grid: grid.map((row) => row.map((item) => ({ ...item }))),
+      playerPairs: [...playerPairs],
+      activePlayerIndex,
+      moves,
+      isEndGame: game.isEndGame(),
+    });
   },
 
   isEndGame: () => game.grid.every((row) => row.every(({ isTurnedOver }) => isTurnedOver)),
