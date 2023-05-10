@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { Logo } from '@/ui/shared';
+import { Logo, useGame } from '@/ui/shared';
 import { Grid } from './grid';
 import { Menu } from './menu';
 import { MultiplayerInfo } from './multiplayer-info';
@@ -7,30 +6,38 @@ import { SoloInfo } from './solo-info';
 import styles from './game-in-progress.module.css';
 
 export const GameInProgress = () => {
-  const [timeElapsed, setTimeElapsed] = useState('0:00');
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTimeElapsed(computeTimeElapsed(startTime));
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+  const {
+    isIconTheme,
+    playerPairs,
+    activePlayerIndex,
+    moves,
+    secondsElapsed,
+    restartGame,
+    showSettingsScreen,
+  } = useGame();
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <Logo variant="header" />
-        <Menu restart={() => null} newGame={() => null} />
+        <Menu restart={restartGame} newGame={showSettingsScreen} />
       </header>
       <main className={styles.main}>
-        <Grid data={gridData} onTileClick={() => null} />
-        {playerScores.length > 1 ? (
-          <MultiplayerInfo playerScores={playerScores} playerIndex={1} />
+        <Grid data={gridData} withIcons={isIconTheme} onTileClick={() => null} />
+        {playerPairs.length > 1 ? (
+          <MultiplayerInfo playerScores={playerPairs} playerIndex={activePlayerIndex} />
         ) : (
-          <SoloInfo timeElapsed={timeElapsed} moves={39} />
+          <SoloInfo timeElapsed={formatTimeElapsed(secondsElapsed)} moves={moves} />
         )}
       </main>
     </div>
   );
+};
+
+const formatTimeElapsed = (totalSeconds: number) => {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return minutes + ':' + seconds.toString().padStart(2, '0');
 };
 
 const gridData = [
@@ -83,14 +90,3 @@ const gridData = [
     { txtValue: '6' },
   ],
 ];
-
-const playerScores = [4, 4, 2, 0];
-
-const computeTimeElapsed = (startTime: Date) => {
-  const totalSeconds = Math.floor((Date.now() - startTime.getTime()) / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return minutes + ':' + seconds.toString().padStart(2, '0');
-};
-
-const startTime = new Date();

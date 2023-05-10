@@ -9,6 +9,7 @@ export const timer = {
   start: () => {
     startTime = new Date();
     secondsElapsed = 0;
+    timer.notifySecondsElapsed();
     intervalId = setInterval(() => {
       secondsElapsed = Math.floor((Date.now() - startTime.getTime()) / 1000);
       timer.notifySecondsElapsed();
