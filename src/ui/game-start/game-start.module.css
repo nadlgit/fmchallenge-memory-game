@@ -4,7 +4,7 @@
   align-content: center;
   gap: clamp(2.75rem, calc(8.651vmin + 0.722rem), 4.875rem);
   min-height: 100%;
-  padding-block: 0.75rem;
+  padding-block: 0.75rem 1.5rem;
   background-color: hsla(206, 45%, 15%, 1);
 }
 

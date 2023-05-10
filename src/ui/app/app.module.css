@@ -1,0 +1,17 @@
+.app {
+  position: relative;
+  display: grid;
+  min-height: 100%;
+}
+
+.attribution {
+  position: absolute;
+  bottom: 0.25rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.625rem;
+  color: hsla(205, 37%, 55%, 1);
+}
+.attribution a {
+  color: hsla(203, 28%, 79%, 1);
+}
